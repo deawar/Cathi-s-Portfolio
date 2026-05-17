@@ -5,7 +5,8 @@ import { useSearchParams } from "next/navigation";
 
 function ContactForm() {
   const searchParams = useSearchParams();
-  const artworkName = searchParams.get("artwork");
+  // Cap the query param length so a crafted URL can't pre-fill huge text
+  const artworkName = searchParams.get("artwork")?.slice(0, 200) ?? null;
 
   const [form, setForm] = useState({
     name: "",
@@ -58,6 +59,7 @@ function ContactForm() {
             type="text"
             name="name"
             required
+            maxLength={200}
             value={form.name}
             onChange={handleChange}
             className="theme-input w-full border rounded-sm px-4 py-2.5 text-sm"
@@ -86,6 +88,7 @@ function ContactForm() {
         <input
           type="text"
           name="subject"
+          maxLength={300}
           value={form.subject}
           onChange={handleChange}
           className="theme-input w-full border rounded-sm px-4 py-2.5 text-sm"
@@ -100,6 +103,7 @@ function ContactForm() {
           name="message"
           required
           rows={6}
+          maxLength={10000}
           value={form.message}
           onChange={handleChange}
           className="theme-input w-full border rounded-sm px-4 py-2.5 text-sm resize-y"
