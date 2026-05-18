@@ -8,7 +8,7 @@ import ThemePicker from "./ThemePicker";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/paintings", label: "Paintings" },
-  { href: "/sculptures", label: "Sculptures" },
+  { href: "/stained-glass", label: "Stained Glass" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },

@@ -25,7 +25,7 @@ export default defineType({
       options: {
         list: [
           { title: "Painting", value: "painting" },
-          { title: "Sculpture", value: "sculpture" },
+          { title: "Stained Glass", value: "stained-glass" },
         ],
         layout: "radio",
       },

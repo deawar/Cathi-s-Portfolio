@@ -46,7 +46,7 @@ export async function GET(
 
   let imageBuffer: Buffer;
   try {
-    const res = await fetch(cdnUrl, { next: { revalidate: 3600 } });
+    const res = await fetch(cdnUrl, { cache: "no-store" });
     if (!res.ok) {
       return new NextResponse("Image not found", { status: 404 });
     }

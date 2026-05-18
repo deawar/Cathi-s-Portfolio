@@ -1,12 +1,12 @@
 import { sanityClient, getImageRefId } from "@/lib/sanity";
-import { sculpturesQuery, sculptureSeriesQuery } from "@/lib/queries";
+import { stainedGlassQuery, stainedGlassSeriesQuery } from "@/lib/queries";
 import GalleryGrid from "@/components/GalleryGrid";
 
 export const revalidate = 60;
 
 export const metadata = {
-  title: "Sculptures — Cathi Warren",
-  description: "Browse Cathi Warren's original sculptures.",
+  title: "Stained Glass — Cathi Warren",
+  description: "Browse Cathi Warren's original stained glass works.",
 };
 
 function toWatermarkedUrl(image: { asset?: { _ref?: string } } | null | undefined): string {
@@ -14,10 +14,10 @@ function toWatermarkedUrl(image: { asset?: { _ref?: string } } | null | undefine
   return `/api/image/${getImageRefId(image.asset._ref)}`;
 }
 
-export default async function SculpturesPage() {
+export default async function StainedGlassPage() {
   const [rawArtworks, categories] = await Promise.all([
-    sanityClient.fetch(sculpturesQuery).catch(() => []),
-    sanityClient.fetch(sculptureSeriesQuery).catch(() => []),
+    sanityClient.fetch(stainedGlassQuery).catch(() => []),
+    sanityClient.fetch(stainedGlassSeriesQuery).catch(() => []),
   ]);
 
   const artworks = rawArtworks.map((a: Record<string, unknown>) => ({
@@ -27,7 +27,7 @@ export default async function SculpturesPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
-      <h1 className="font-display text-4xl text-center">Sculptures</h1>
+      <h1 className="font-display text-4xl text-center">Stained Glass</h1>
       <div className="section-divider" />
       <GalleryGrid artworks={artworks} categories={categories.filter(Boolean)} />
     </div>

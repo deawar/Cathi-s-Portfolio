@@ -16,8 +16,8 @@ export const paintingsQuery = `
   }
 `;
 
-export const sculpturesQuery = `
-  *[_type == "artwork" && artworkType == "sculpture"] | order(order asc, year desc) {
+export const stainedGlassQuery = `
+  *[_type == "artwork" && artworkType == "stained-glass"] | order(order asc, year desc) {
     _id, title, slug, medium, dimensions, year, series, image, available, price
   }
 `;
@@ -57,6 +57,6 @@ export const paintingSeriesQuery = `
   array::unique(*[_type == "artwork" && artworkType == "painting" && defined(series)].series)
 `;
 
-export const sculptureSeriesQuery = `
-  array::unique(*[_type == "artwork" && artworkType == "sculpture" && defined(series)].series)
+export const stainedGlassSeriesQuery = `
+  array::unique(*[_type == "artwork" && artworkType == "stained-glass" && defined(series)].series)
 `;

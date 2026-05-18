@@ -110,7 +110,7 @@ export default async function HomePage() {
           <h2 className="font-display text-2xl mb-3">About the Artist</h2>
           <div className="section-divider" style={{ margin: "0 0 1.25rem 0" }} />
           <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-            Cathi Warren is a Texas-based artist whose work spans oil painting, watercolor, and sculpture.
+            Cathi Warren is a Texas-based artist whose work spans oil painting, watercolor, and stained glass.
             Drawn to light, texture, and the quiet beauty of everyday scenes, her paintings capture
             moments of warmth and stillness with an expressive hand.
           </p>

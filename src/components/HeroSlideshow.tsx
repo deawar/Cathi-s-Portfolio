@@ -56,14 +56,14 @@ export default function HeroSlideshow({ artworks }: Props) {
             className="text-sm tracking-widest uppercase"
             style={{ color: "var(--text-secondary)" }}
           >
-            Original Paintings &amp; Sculptures
+            Original Paintings &amp; Stained Glass
           </p>
           <div className="mt-8 flex gap-4 justify-center">
             <Link href="/paintings" className="btn-accent px-6 py-3 text-xs tracking-widest uppercase">
               View Paintings
             </Link>
-            <Link href="/sculptures" className="btn-outline px-6 py-3 text-xs tracking-widest uppercase">
-              View Sculptures
+            <Link href="/stained-glass" className="btn-outline px-6 py-3 text-xs tracking-widest uppercase">
+              View Stained Glass
             </Link>
           </div>
         </div>

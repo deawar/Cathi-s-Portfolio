@@ -21,7 +21,7 @@ export default function Footer() {
 
         <nav className="flex items-center gap-6 text-xs tracking-widest uppercase" style={{ color: "var(--text-secondary)" }}>
           <Link href="/paintings" className="hover:opacity-60 transition-opacity">Paintings</Link>
-          <Link href="/sculptures" className="hover:opacity-60 transition-opacity">Sculptures</Link>
+          <Link href="/stained-glass" className="hover:opacity-60 transition-opacity">Stained Glass</Link>
           <Link href="/blog" className="hover:opacity-60 transition-opacity">Blog</Link>
           <Link href="/contact" className="hover:opacity-60 transition-opacity">Contact</Link>
         </nav>

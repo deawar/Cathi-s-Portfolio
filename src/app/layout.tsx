@@ -19,10 +19,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Cathi Warren — Artist",
   description:
-    "Original paintings and sculptures by Texas artist Cathi Warren. Browse the gallery, read studio notes, and inquire about available works.",
+    "Original paintings and stained glass by Texas artist Cathi Warren. Browse the gallery, read studio notes, and inquire about available works.",
   openGraph: {
     title: "Cathi Warren — Artist",
-    description: "Original paintings and sculptures by Texas artist Cathi Warren.",
+    description: "Original paintings and stained glass by Texas artist Cathi Warren.",
     url: "https://cathiwarren.art",
     siteName: "Cathi Warren Art",
     type: "website",
