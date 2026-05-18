@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Protects /studio with HTTP Basic Auth.
 // Set STUDIO_USERNAME and STUDIO_PASSWORD in your environment variables.
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   if (!req.nextUrl.pathname.startsWith("/studio")) {
     return NextResponse.next();
   }
