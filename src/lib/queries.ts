@@ -47,6 +47,12 @@ export const blogPostBySlugQuery = `
   }
 `;
 
+export const artistProfileQuery = `
+  *[_type == "artistProfile" && _id == "artistProfile"][0] {
+    photo, photoCaption, artistStatement, biography, cv, contactNote
+  }
+`;
+
 export const paintingSeriesQuery = `
   array::unique(*[_type == "artwork" && artworkType == "painting" && defined(series)].series)
 `;

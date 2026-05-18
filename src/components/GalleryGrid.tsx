@@ -78,12 +78,15 @@ export default function GalleryGrid({ artworks, categories }: Props) {
               onKeyDown={(e) => e.key === "Enter" && openLightbox(i)}
               aria-label={`View ${art.title}`}
             >
-              <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
+              <div
+                className="relative overflow-hidden flex items-center justify-center"
+                style={{ aspectRatio: "4/3", background: "var(--bg-secondary)" }}
+              >
                 <Image
                   src={art.watermarkedUrl}
                   alt={art.title}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
                 <div

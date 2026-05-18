@@ -71,12 +71,15 @@ export default async function HomePage() {
             {(featured as FeaturedArt[]).map((art) => (
               <div key={art._id} className="gallery-card rounded-sm">
                 {art.watermarkedUrl && (
-                  <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
+                  <div
+                    className="relative overflow-hidden flex items-center justify-center"
+                    style={{ aspectRatio: "4/3", background: "var(--bg-secondary)" }}
+                  >
                     <Image
                       src={art.watermarkedUrl}
                       alt={art.title}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
                   </div>
