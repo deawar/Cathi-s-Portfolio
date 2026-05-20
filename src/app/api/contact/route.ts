@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
     const headerSafe = (s: string) => s.replaceAll("\r", "").replaceAll("\n", " ").trim();
 
     await resend.emails.send({
-      from: "cathiwarren.art <onboarding@resend.dev>",
+      from: "Cathi Warren Art <contact@cathiwarren.art>",
       to,
       replyTo: email.trim(),
       subject: headerSafe(safeSubject)
