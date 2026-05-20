@@ -40,11 +40,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
   }
 
-  // Origin check — reject cross-origin POST requests
+  // Origin check — reject cross-origin POST requests.
+  // Normalise both sides so https://cathiwarren.art and
+  // https://www.cathiwarren.art are treated as the same origin.
   const origin = req.headers.get("origin");
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  if (origin && siteUrl && origin !== siteUrl) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  if (origin && siteUrl) {
+    const normalise = (u: string) =>
+      u.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "").toLowerCase();
+    if (normalise(origin) !== normalise(siteUrl)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
   }
 
   try {
@@ -69,7 +75,7 @@ export async function POST(req: NextRequest) {
     }
 
     const safeSubject = typeof subject === "string" ? subject.slice(0, 300) : "";
-    const to = process.env.CONTACT_EMAIL || "cathi@cathiwarren.art";
+    const to = process.env.CONTACT_EMAIL || "REDACTED";
 
     // Strip CRLF from any value used in email headers to prevent header injection
     const headerSafe = (s: string) => s.replaceAll("\r", "").replaceAll("\n", " ").trim();
