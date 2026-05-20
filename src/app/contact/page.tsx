@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 function ContactForm() {
   const searchParams = useSearchParams();
   // Cap the query param length so a crafted URL can't pre-fill huge text
   const artworkName = searchParams.get("artwork")?.slice(0, 200) ?? null;
+
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -27,7 +29,7 @@ function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, website: honeypotRef.current?.value ?? "" }),
       });
       setStatus(res.ok ? "sent" : "error");
     } catch {
@@ -110,6 +112,11 @@ function ContactForm() {
           style={{ borderColor: "var(--border)", background: "var(--input-bg)", color: "var(--text-primary)" }}
         />
       </div>
+      {/* Honeypot — hidden from humans, filled by bots */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}>
+        <input type="text" name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
+      </div>
+
       {status === "error" && (
         <p className="text-sm text-red-500">
           Something went wrong. Please email directly at{" "}

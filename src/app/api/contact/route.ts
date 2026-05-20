@@ -55,7 +55,12 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json();
-    const { name, email, subject, message } = body as Record<string, unknown>;
+    const { name, email, subject, message, website } = body as Record<string, unknown>;
+
+    // Honeypot — bots fill hidden fields, humans don't. Return fake success silently.
+    if (typeof website === "string" && website.length > 0) {
+      return NextResponse.json({ ok: true });
+    }
 
     // Validate types and lengths
     if (
