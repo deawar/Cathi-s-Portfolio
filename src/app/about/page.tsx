@@ -9,7 +9,7 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "About — Cathi Warren",
-  description: "Learn about Texas artist Cathi Warren — her story, inspiration, and artistic practice.",
+  description: "Learn about Georgia artist Cathi Warren — her story, inspiration, and artistic practice.",
 };
 
 type Block = { _type: string; _key: string; [key: string]: unknown };
@@ -102,7 +102,7 @@ export default async function AboutPage() {
                 </p>
                 <p>
                   Working primarily in oils and watercolor, I explore landscapes, still life, and the
-                  human form. My sculptures extend that language into three dimensions — bronze and clay
+                  human form. My stained glass extends that language into light and colour — each piece
                   shaped by hand, bearing the marks of making.
                 </p>
                 <p className="text-xs italic" style={{ color: "var(--text-secondary)", opacity: 0.6 }}>
@@ -121,12 +121,12 @@ export default async function AboutPage() {
               ) : (
                 <div className="space-y-4 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                   <p>
-                    Cathi Warren is a Texas-based artist with a studio in the Houston area. She has been
-                    painting and sculpting for over two decades, drawing inspiration from the landscapes,
+                    Cathi Warren is a Georgia-based artist with a studio in the Athens area. She has been
+                    painting, teaching, and creating stained glass for over two decades, drawing inspiration from her family, landscapes,
                     gardens, and quiet interiors of everyday life.
                   </p>
                   <p>
-                    Her work has been exhibited throughout Texas and collected by private collectors
+                    Her work has been exhibited throughout Georgia and collected by private collectors
                     across the country. She teaches workshops and accepts commissions for original paintings.
                   </p>
                   <p className="text-xs italic" style={{ color: "var(--text-secondary)", opacity: 0.6 }}>
