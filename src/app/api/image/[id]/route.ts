@@ -64,12 +64,8 @@ export async function GET(
         "Cache-Control": "public, max-age=86400, stale-while-revalidate=3600",
       },
     });
-  } catch {
-    return new NextResponse(new Uint8Array(imageBuffer), {
-      headers: {
-        "Content-Type": "image/jpeg",
-        "Cache-Control": "public, max-age=86400",
-      },
-    });
+  } catch (err) {
+    console.error("Watermark failed — refusing to serve unprotected image:", err);
+    return new NextResponse("Image processing failed", { status: 500 });
   }
 }

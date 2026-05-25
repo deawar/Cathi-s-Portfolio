@@ -1,3 +1,4 @@
+import { timingSafeEqual } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 
 // Protects /studio with HTTP Basic Auth.
@@ -20,9 +21,21 @@ export function proxy(req: NextRequest) {
     const [scheme, encoded] = authHeader.split(" ");
     if (scheme === "Basic" && encoded) {
       const decoded = Buffer.from(encoded, "base64").toString("utf-8");
-      const [reqUser, reqPass] = decoded.split(":");
-      if (reqUser === user && reqPass === pass) {
-        return NextResponse.next();
+      // Split on the first colon only — passwords may contain colons (RFC 7617)
+      const colonIdx = decoded.indexOf(":");
+      if (colonIdx !== -1) {
+        const reqUser = decoded.slice(0, colonIdx);
+        const reqPass = decoded.slice(colonIdx + 1);
+        // Timing-safe comparison prevents brute-force via response latency
+        const userMatch =
+          reqUser.length === user.length &&
+          timingSafeEqual(Buffer.from(reqUser), Buffer.from(user));
+        const passMatch =
+          reqPass.length === pass.length &&
+          timingSafeEqual(Buffer.from(reqPass), Buffer.from(pass));
+        if (userMatch && passMatch) {
+          return NextResponse.next();
+        }
       }
     }
   }

@@ -43,14 +43,17 @@ export async function POST(req: NextRequest) {
   // Origin check — reject cross-origin POST requests.
   // Normalise both sides so https://cathiwarren.art and
   // https://www.cathiwarren.art are treated as the same origin.
+  // Fails closed: if NEXT_PUBLIC_SITE_URL is not set in production, block all requests.
   const origin = req.headers.get("origin");
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  if (origin && siteUrl) {
-    const normalise = (u: string) =>
-      u.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "").toLowerCase();
-    if (normalise(origin) !== normalise(siteUrl)) {
+  const normalise = (u: string) =>
+    u.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "").toLowerCase();
+  if (siteUrl) {
+    if (!origin || normalise(origin) !== normalise(siteUrl)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
+  } else if (process.env.NODE_ENV === "production") {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
   try {
