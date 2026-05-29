@@ -83,7 +83,11 @@ export async function POST(req: NextRequest) {
     }
 
     const safeSubject = typeof subject === "string" ? subject.slice(0, 300) : "";
-    const to = process.env.CONTACT_EMAIL || "REDACTED";
+    const to = process.env.CONTACT_EMAIL;
+    if (!to) {
+      console.error("CONTACT_EMAIL environment variable is not set");
+      return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
+    }
 
     // Strip CRLF from any value used in email headers to prevent header injection
     const headerSafe = (s: string) => s.replaceAll("\r", "").replaceAll("\n", " ").trim();
